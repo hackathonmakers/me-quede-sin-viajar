@@ -55,21 +55,27 @@ var travelrequest = {
     save: function (data, callback) {
         var newTravelrequest = new ph({
             geo: data.geo,
-    		requested: data.requested,
-    		carpooling: data.carpooling
+    		    requested: data.requested,
+    		    carpooling: data.carpooling
         });
         newTravelrequest.save(callback);
     },
-    getStats: function(callback) {
+    getWorstDay: function(callback) {
     	ph.aggregate(
 		    { $group : {
 		        _id: {
-		            year : { $year : "$date" },        
-		            month : { $month : "$date" },        
-		            day : { $dayOfMonth : "$date" },
+		            year : { $year : "$requested" },        
+		            month : { $month : "$requested" },        
+		            day : { $dayOfMonth : "$requested" },
 		        },
 		        count: { $sum: 1 }
 		    }},
+        { $group : { 
+          _id: null,
+          maxCount: {
+           $max: '$count' 
+          }
+        }},
 		    function (err, res) {
 		    	callback(res);
 		    }

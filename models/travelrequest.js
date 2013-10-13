@@ -7,7 +7,7 @@ var travelrequestSchema = mongoose.Schema({
     latitude: String,
     longitude: String,
     company: String,
-    requested: String,
+    requested: Date,
     car_pooling: Boolean
 })
 module.exports = mongoose.model('travelrequest', travelrequestSchema);
