@@ -16,3 +16,16 @@ exports.add = function(req, res){
   });
   
 };
+
+exports.mock = function(req, res){
+  var json = {geo:{lat:20, lon:30}, request: new Date(), carpooling:true};
+  travelrequestRepository.save(json, function(err){
+  	if (!err) {
+  		res.send("ok", 200);	
+  	} else {
+  		res.send("failed", 500);
+  	}
+  	
+  });
+  
+};

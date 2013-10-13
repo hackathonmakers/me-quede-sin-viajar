@@ -52,15 +52,11 @@ var travelrequest = {
               }
           });
      },
-    create: function (data, callback) {
+    save: function (data, callback) {
         var newTravelrequest = new ph({
-            title: data.title,
-            description: data.description,
-            username: data.username,
-            created_time: new Date(),
-            tags : data.tags,
-            comments: 0,
-            likes: 0
+            geo: data.geo,
+    		requested: data.requested,
+    		carpooling: data.carpooling
         });
         newTravelrequest.save(callback);
     }

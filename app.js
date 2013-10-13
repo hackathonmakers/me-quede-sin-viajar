@@ -30,6 +30,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.post('/', travelrequest.add);
+app.post('/mock/', travelrequest.mock);
 app.get('/stats', auth, travelrequest.fetch);
 
 http.createServer(app).listen(app.get('port'), function(){
