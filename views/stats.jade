@@ -9,6 +9,18 @@ block content
 			div(class="eight columns")
 				div(class="row")
 				h2 Ayudemos a 
-					strong personas a llegar a su casa
+					strong #{stats.maxCount} 
+					span personas a llegar a su casa
+			div(class="twelve columns")
+				div(class="row")
+					h3 La empresa 
+						strong #{companyStats.company} 
+						span dejo a 
+						strong #{companyStats.maxCount} 
+						span personas
+			div(class="seven columns")
+				div(class="row")
+					h3 La hora con mas inconvenientes es 
+					strong 6 PM
 
 block scripts

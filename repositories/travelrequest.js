@@ -79,7 +79,28 @@ var travelrequest = {
 		    function (err, res) {
 		    	callback(res);
 		    }
-		);
+		  );
+    },
+    getWorstCompany: function(callback) {
+      ph.aggregate(
+        { $project : {
+          company : 1
+        }},
+        { $group : {
+            _id: null,
+            count: { $sum: 1 }
+        }},
+        { $group : { 
+          _id: null,
+          worstCompany: {
+            $max: '$count' 
+          }
+        }},
+        function (err, res) {
+          console.log(res);
+          callback(res);
+        }
+      );
     }
 };
 
