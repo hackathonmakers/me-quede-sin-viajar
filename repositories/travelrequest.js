@@ -94,6 +94,7 @@ var travelrequest = {
         }},
         { $group : { 
           _id: null,
+          company: $company,
           worstCompany: {
             $max: '$count' 
           }

@@ -11,7 +11,7 @@ exports.fetch = function(req, res){
 };
 
 exports.add = function(req, res){
-  var json = req.body.json;
+  var json = req.body;
   travelrequestRepository.save(json, function(err){
   	if (!err) {
   		res.send({'status': "ok"}, 200);	
