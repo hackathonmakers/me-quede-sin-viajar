@@ -58,7 +58,7 @@ var travelrequest = {
             longitude: data.longitude,
     		    requested: data.requested,
             company: data.company,
-    		    carpooling: data.carpooling
+    		    car_pooling: data.car_pooling
         });
         newTravelrequest.save(callback);
     },
@@ -84,20 +84,40 @@ var travelrequest = {
 		  );
     },
     getWorstCompany: function(callback) {
-      ph.aggregate(
-        { $project : {
-          company : 1
-        }},
+      ph.aggregate([
         { $group : {
             _id: null,
             count: { $sum: 1 }
         }},
         { $group : { 
-          _id: null,
-          company: $company,
+          _id: "$company",
           worstCompany: {
-            $max: '$count' 
+            $max: '$count'
           }
+        }}],
+        function (err, res) {
+          callback(res);
+        }
+      );
+    },
+    getWorstCompanyName: function(callback) {
+      ph.aggregate(
+        { $group : {
+            _id: "$company",
+            count: { $sum: 1 }
+        }},
+        function (err, res) {
+          callback(res);
+        }
+      );
+    },
+    getWorstHour: function(callback) {
+      ph.aggregate(
+        { $group : {
+            _id: {
+              hour : { $hour : "$requested" }
+            },
+            count: { $sum: 1 }
         }},
         function (err, res) {
           console.log(res);
