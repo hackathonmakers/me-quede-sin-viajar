@@ -54,8 +54,10 @@ var travelrequest = {
     },
     save: function (data, callback) {
         var newTravelrequest = new ph({
-            geo: data.geo,
+            latitude: data.latitude,
+            longitude: data.longitude,
     		    requested: data.requested,
+            company: data.company,
     		    carpooling: data.carpooling
         });
         newTravelrequest.save(callback);
