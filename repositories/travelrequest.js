@@ -51,7 +51,7 @@ var travelrequest = {
                   callback(records);
               }
           });
-     },
+    },
     save: function (data, callback) {
         var newTravelrequest = new ph({
             geo: data.geo,
@@ -59,6 +59,21 @@ var travelrequest = {
     		carpooling: data.carpooling
         });
         newTravelrequest.save(callback);
+    },
+    getStats: function(callback) {
+    	ph.aggregate(
+		    { $group : {
+		        _id: {
+		            year : { $year : "$date" },        
+		            month : { $month : "$date" },        
+		            day : { $dayOfMonth : "$date" },
+		        },
+		        count: { $sum: 1 }
+		    }},
+		    function (err, res) {
+		    	callback(res);
+		    }
+		);
     }
 };
 

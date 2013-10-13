@@ -1,7 +1,9 @@
 var travelrequestRepository = require('../repositories/travelrequest.js');
 
 exports.fetch = function(req, res){
-  res.send("respond with a resource");
+  travelrequestRepository.getStats(function (data) {
+	res.render('stats', {'stats':data});  	
+  })
 };
 
 exports.add = function(req, res){
@@ -18,7 +20,7 @@ exports.add = function(req, res){
 };
 
 exports.mock = function(req, res){
-  var json = {geo:{lat:20, lon:30}, request: new Date(), carpooling:true};
+  var json = {latitude:20, longitude:30, company: 'emp1', request: new Date(), car_pooling:true};
   travelrequestRepository.save(json, function(err){
   	if (!err) {
   		res.send("ok", 200);	
